@@ -33,19 +33,23 @@ class App extends Component {
           <ChipperContainer
             callback={this.yourCallback}
           />
-
           <br/>
           <br/>
-          {
+          {/* {
             this.state.searchResults !== ''
             ? this.state.searchResults.map(
               (r, k) => <div key={k}>{r.snippet.title}</div>
             )
             : <div></div>
-          }
-
-          <SearchItem />
-
+          } */}
+        {
+          this.state.searchResults !== ''
+          ?
+          <SearchItem
+            applications={this.state.searchResults}
+          />
+          : <div></div>
+        }
       </div>
     </MuiThemeProvider>
     );

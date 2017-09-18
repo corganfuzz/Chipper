@@ -5,7 +5,7 @@ const styles = {
   appCard: {
     display: 'inline-block',
     width: 200,
-    height: 270,
+    height: 'auto',
     margin: 10,
     textAlign: 'left',
     cursor: 'pointer',
@@ -21,6 +21,11 @@ const styles = {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis'
+  },
+  sub:{
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
   }
 }
 class SearchItem extends Component {
@@ -29,26 +34,36 @@ class SearchItem extends Component {
   //
   // }
   render () {
+
+    const {applications} = this.props;
+
+
     return (
       <div>
-        <Card style={styles.appCard}>
-          <CardMedia style={styles.appMedia}>
-          </CardMedia>
-
-          <CardTitle
-            titleStyle={styles.title}
-            title={"Item"}
-            subtitle="Application"
-          />
-          <CardText>
-            <div>
-              <div>Status:
-                <b></b>
-              </div>
-            </div>
-          </CardText>
-
-        </Card>
+      {
+        applications.map((app, k) => {
+          return (
+            <Card key={k} style={styles.appCard}>
+              <CardMedia style={styles.appMedia}>
+              </CardMedia>
+              <CardTitle
+                key={k}
+                titleStyle={styles.title}
+                title={app.snippet.title}
+                subtitle={app.snippet.channelTitle}
+                subtitleStyle={styles.sub}
+              />
+              <CardText>
+                <div>
+                  <div>
+                    {app.snippet.description}
+                  </div>
+                </div>
+              </CardText>
+            </Card>
+          );
+        })
+      }
       </div>
     );
   }
